@@ -5,6 +5,6 @@ package dev.couderc.exercise2;
  */
 public class Office {
     public static SpreadsheetImpl newSpreadsheet(int rows, int columns) {
-        return new SpreadsheetImpl();
+        return new SpreadsheetImpl(rows, columns);
     }
 }
