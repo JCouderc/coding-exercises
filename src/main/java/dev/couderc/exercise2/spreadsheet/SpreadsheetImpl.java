@@ -1,4 +1,4 @@
-package dev.couderc.exercise2;
+package dev.couderc.exercise2.spreadsheet;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,9 +9,9 @@ import java.util.Collections;
  */
 public class SpreadsheetImpl {
 
-    private static final String DEFAULT_VALUE = "";
+    private static final Cell DEFAULT_VALUE = new Cell(ValueType.STRING, "");
 
-    private final ArrayList<ArrayList<String>> grid;
+    private final ArrayList<ArrayList<Cell>> grid;
 
     /**
      * Constructs a new spreadsheet with the specified size
@@ -32,7 +32,7 @@ public class SpreadsheetImpl {
      * @return the cell content at the specified position
      */
     public String get(int row, int column) {
-        return this.grid.get(row).get(column);
+        return this.grid.get(row).get(column).value();
     }
 
     /**
@@ -42,10 +42,18 @@ public class SpreadsheetImpl {
      * @param value The new cell value
      */
     public void put(int row, int column, String value) {
-        this.grid.get(row).set(column, value);
+        this.grid.get(row).set(column, new Cell(ValueType.evaluateValueType(value), value));
     }
 
-    public ValueType getValueType(int i, int i1) {
-        return null;
+
+
+    /**
+     * Get the type of the specified cell
+     * @param row Cell row index
+     * @param column Cell column index
+     * @return The cell type.
+     */
+    public ValueType getValueType(int row, int column) {
+        return this.grid.get(row).get(column).type();
     }
 }

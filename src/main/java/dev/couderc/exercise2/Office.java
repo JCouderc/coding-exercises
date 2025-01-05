@@ -1,5 +1,7 @@
 package dev.couderc.exercise2;
 
+import dev.couderc.exercise2.spreadsheet.SpreadsheetImpl;
+
 /**
  * @author J Couderc
  */

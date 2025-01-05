@@ -2,8 +2,8 @@ package dev.couderc;
 
 import dev.couderc.exercise2.exporter.DashSpreadsheetExporter;
 import dev.couderc.exercise2.Office;
-import dev.couderc.exercise2.SpreadsheetImpl;
-import dev.couderc.exercise2.ValueType;
+import dev.couderc.exercise2.spreadsheet.SpreadsheetImpl;
+import dev.couderc.exercise2.spreadsheet.ValueType;
 import dev.couderc.exercise2.exporter.StarSpreadsheetExporter;
 import org.junit.Assert;
 import org.junit.Before;
