@@ -9,11 +9,16 @@ public enum ValueType {
         @Override
         protected boolean isValidType(String value) {
             try {
-                Integer.parseInt(value);
+                Integer.parseInt(value.trim());
                 return true;
             } catch (NumberFormatException e) {
                 return false;
             }
+        }
+
+        @Override
+        public String preprocessValue(String value) {
+            return value.trim();
         }
     },
     FORMULA {
@@ -31,6 +36,16 @@ public enum ValueType {
     };
 
     protected abstract boolean isValidType(String value);
+
+    /**
+     * Transforms a value to its cell representation.
+     * By default, no transformation is applied, the value is returned as is.
+     * @param value The entered value.
+     * @return The value in its cell representation.
+     */
+    public String preprocessValue(String value) {
+        return value;
+    }
 
     /**
      * Returns the type of cell associated with the value.

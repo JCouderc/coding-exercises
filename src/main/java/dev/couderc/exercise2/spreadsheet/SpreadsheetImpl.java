@@ -42,7 +42,8 @@ public class SpreadsheetImpl {
      * @param value The new cell value
      */
     public void put(int row, int column, String value) {
-        this.grid.get(row).set(column, new Cell(ValueType.evaluateValueType(value), value));
+        ValueType cellType = ValueType.evaluateValueType(value);
+        this.grid.get(row).set(column, new Cell(cellType, cellType.preprocessValue(value)));
     }
 
 
