@@ -5,6 +5,7 @@ import dev.couderc.exercise2.spreadsheet.core.Spreadsheet;
 import java.util.stream.Stream;
 
 /**
+ * Spreadsheet exporter in a dash separated value text format
  * @author J Couderc
  */
 public class DashSpreadsheetExporter {
@@ -17,6 +18,10 @@ public class DashSpreadsheetExporter {
         this.sheet = sheet;
     }
 
+    /**
+     * Exports the spreadsheet in a dash separated value text format
+     * @return The exported spreadsheet
+     */
     public String export() {
         StringBuilder sb = new StringBuilder();
         int rows = this.sheet.getNumberOfRows();
