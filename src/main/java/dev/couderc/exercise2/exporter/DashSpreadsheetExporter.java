@@ -8,30 +8,16 @@ import java.util.stream.Stream;
  * Spreadsheet exporter in a dash separated value text format
  * @author J Couderc
  */
-public class DashSpreadsheetExporter {
+public class DashSpreadsheetExporter extends AbstractSpreadsheetExporter {
 
     private static final char SEPARATOR = '-';
 
-    private final Spreadsheet sheet;
-
     public DashSpreadsheetExporter(Spreadsheet sheet) {
-        this.sheet = sheet;
+        super(sheet);
     }
 
-    /**
-     * Exports the spreadsheet in a dash separated value text format
-     * @return The exported spreadsheet
-     */
-    public String export() {
-        StringBuilder sb = new StringBuilder();
-        int rows = this.sheet.getNumberOfRows();
-        int columns = this.sheet.getNumberOfColumns();
-        sb.append(rows).append(',').append(columns).append('#');
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                sb.append(this.sheet.get(i, j)).append(SEPARATOR);
-            }
-        }
-        return sb.toString();
+    @Override
+    protected char getSeparator() {
+        return SEPARATOR;
     }
 }
