@@ -1,6 +1,6 @@
 package dev.couderc.exercise2;
 
-import dev.couderc.exercise2.spreadsheet.SpreadsheetImpl;
+import dev.couderc.exercise2.spreadsheet.impl.SpreadsheetImpl;
 
 /**
  * @author J Couderc

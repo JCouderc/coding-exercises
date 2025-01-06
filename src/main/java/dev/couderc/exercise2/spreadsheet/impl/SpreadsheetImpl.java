@@ -1,4 +1,7 @@
-package dev.couderc.exercise2.spreadsheet;
+package dev.couderc.exercise2.spreadsheet.impl;
+
+import dev.couderc.exercise2.spreadsheet.core.Spreadsheet;
+import dev.couderc.exercise2.spreadsheet.core.ValueType;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,7 +10,7 @@ import java.util.Collections;
  * Basic implementation of a spreadsheet
  * @author J Couderc
  */
-public class SpreadsheetImpl {
+public class SpreadsheetImpl implements Spreadsheet {
 
     private static final Cell DEFAULT_VALUE = new Cell(ValueType.STRING, "");
 
@@ -31,6 +34,7 @@ public class SpreadsheetImpl {
      * @param column Cell column index
      * @return the cell content at the specified position
      */
+    @Override
     public String get(int row, int column) {
         return this.grid.get(row).get(column).value();
     }
@@ -56,5 +60,23 @@ public class SpreadsheetImpl {
      */
     public ValueType getValueType(int row, int column) {
         return this.grid.get(row).get(column).type();
+    }
+
+    /**
+     * Get the number of rows in the spreadsheet
+     * @return The number of rows
+     */
+    @Override
+    public int getNumberOfRows() {
+        return this.grid.size();
+    }
+
+    /**
+     * Get the number of columns in the spreadsheet
+     * @return The number of columns
+     */
+    @Override
+    public int getNumberOfColumns() {
+        return this.grid.getFirst().size();
     }
 }

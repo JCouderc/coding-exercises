@@ -1,4 +1,6 @@
-package dev.couderc.exercise2.spreadsheet;
+package dev.couderc.exercise2.spreadsheet.impl;
+
+import dev.couderc.exercise2.spreadsheet.core.ValueType;
 
 /**
  * Spreadsheet cell data

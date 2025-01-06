@@ -1,4 +1,4 @@
-package dev.couderc.exercise2.spreadsheet;
+package dev.couderc.exercise2.spreadsheet.core;
 
 /**
  * Enumeration of available cell types
