@@ -6,13 +6,14 @@ import dev.couderc.exercise3.PackageDependenciesMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.nio.file.Path;
 import java.util.List;
 
 public class Exercise3Test {
 
     @Test
     void getPackageDependencies() {
-        PackageDependencies deps = PackageDependenciesMapper.fromJson("""
+        PackageDependencies deps = new PackageDependencies("""
                 {
                   "pkg1": ["pkg2", "pkg3"],
                   "pkg2": ["pkg3"],
@@ -27,7 +28,7 @@ public class Exercise3Test {
 
     @Test
     void getBasicDependencyGraphRepresentation() {
-        PackageDependencies deps = PackageDependenciesMapper.fromJson("""
+        PackageDependencies deps = new PackageDependencies("""
                 {
                   "pkg1": ["pkg2", "pkg3"],
                   "pkg2": ["pkg3"],
@@ -45,4 +46,16 @@ public class Exercise3Test {
                 """, deps.buildBasicTreeRepresentation());
     }
 
+    @Test
+    void getBasicDependencyGraphRepresentationFromFile() {
+        Assertions.assertEquals("""
+                - pkg1
+                  - pkg2
+                    - pkg3
+                  - pkg3
+                - pkg2
+                  - pkg3
+                - pkg3
+                """, new PackageDependencies(Path.of("src/test/resources/pkg-dependencies.json")).buildBasicTreeRepresentation());
+    }
 }

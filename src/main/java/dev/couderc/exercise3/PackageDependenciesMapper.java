@@ -15,7 +15,7 @@ public class PackageDependenciesMapper {
      * @param input The json input
      * @return The extracted map.
      */
-    private static Map<String, Set<String>> parseJson(String input) {
+    public static Map<String, Set<String>> fromJson(String input) {
         // Remove whitespaces, newlines and quotes
         input = input.replaceAll("[\\s\"]+", "");
 
@@ -38,15 +38,6 @@ public class PackageDependenciesMapper {
             }
         }
         return result;
-    }
-
-    /**
-     * Transforms a json representation of package dependencies into a dependencies object
-     * @param input The json representation.
-     * @return The package dependencies object.
-     */
-    public static PackageDependencies fromJson(String input) {
-        return new PackageDependencies(parseJson(input));
     }
 
 }

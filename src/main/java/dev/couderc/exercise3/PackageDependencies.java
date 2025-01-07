@@ -1,5 +1,8 @@
 package dev.couderc.exercise3;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Map;
 import java.util.Set;
 
@@ -12,8 +15,16 @@ public class PackageDependencies {
 
     private final Map<String, Set<String>> dependenciesMap;
 
-    public PackageDependencies(Map<String, Set<String>> dependenciesMap) {
-        this.dependenciesMap = dependenciesMap;
+    public PackageDependencies(String jsonInput) {
+        this.dependenciesMap = PackageDependenciesMapper.fromJson(jsonInput);
+    }
+
+    public PackageDependencies(Path jsonFile) {
+        try {
+            this.dependenciesMap = PackageDependenciesMapper.fromJson(Files.readString(jsonFile));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -25,6 +36,10 @@ public class PackageDependencies {
         return this.dependenciesMap.getOrDefault(packageName, Set.of());
     }
 
+    /**
+     * Returns a basic graph representation of each package dependencies
+     * @return The graph representation.
+     */
     public String buildBasicTreeRepresentation() {
         StringBuilder sb = new StringBuilder();
         this.dependenciesMap.keySet().forEach(key -> {
