@@ -8,6 +8,8 @@ import java.util.Set;
  */
 public class PackageDependencies {
 
+    private static final int SPACES_BY_LEVEL = 2;
+
     private final Map<String, Set<String>> dependenciesMap;
 
     public PackageDependencies(Map<String, Set<String>> dependenciesMap) {
@@ -21,5 +23,23 @@ public class PackageDependencies {
      */
     public Set<String> getDependencies(String packageName) {
         return this.dependenciesMap.getOrDefault(packageName, Set.of());
+    }
+
+    public String buildBasicTreeRepresentation() {
+        StringBuilder sb = new StringBuilder();
+        this.dependenciesMap.keySet().forEach(key -> {
+            appendWithLevel(sb, key, 0);
+        });
+        return sb.toString();
+    }
+
+    private void appendWithLevel(StringBuilder sb, String key, int level) {
+        sb.append(" ".repeat(level * SPACES_BY_LEVEL))
+                .append("- ")
+                .append(key)
+                .append("\n");
+        for (String dependency : getDependencies(key)) {
+            appendWithLevel(sb, dependency, level + 1);
+        }
     }
 }
