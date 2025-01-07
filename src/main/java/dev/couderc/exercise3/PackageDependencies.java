@@ -12,6 +12,7 @@ import java.util.Set;
 public class PackageDependencies {
 
     private static final int SPACES_BY_LEVEL = 2;
+    private static final int PRETTY_SPACES_BY_LEVEL = 4;
 
     private final Map<String, Set<String>> dependenciesMap;
 
@@ -40,7 +41,7 @@ public class PackageDependencies {
      * Returns a basic graph representation of each package dependencies
      * @return The graph representation.
      */
-    public String buildBasicTreeRepresentation() {
+    public String buildBasicTree() {
         StringBuilder sb = new StringBuilder();
         this.dependenciesMap.keySet().forEach(key -> {
             appendWithLevel(sb, key, 0);
@@ -55,6 +56,34 @@ public class PackageDependencies {
                 .append("\n");
         for (String dependency : getDependencies(key)) {
             appendWithLevel(sb, dependency, level + 1);
+        }
+    }
+
+    /**
+     * Returns a 'pretty' graph representation of each package dependencies
+     * @return The graph representation.
+     */
+    public String buildPrettyTree() {
+        StringBuilder sb = new StringBuilder();
+        Set<String> keys = this.dependenciesMap.keySet();
+        int count = 0;
+        for (String key : keys) {
+            count++;
+            prettyAppendWithLevel(sb, "", key, count == keys.size());
+        }
+        return sb.toString();
+    }
+
+    private void prettyAppendWithLevel(StringBuilder sb, String prefix, String key, boolean last) {
+        sb.append(prefix)
+                .append(last ? "\\--- " : "+--- ")
+                .append(key)
+                .append("\n");
+        Set<String> dependencies = getDependencies(key);
+        int count = 0;
+        for (String dependency : dependencies) {
+            count++;
+            prettyAppendWithLevel(sb, prefix + "|" + " ".repeat(PRETTY_SPACES_BY_LEVEL), dependency, count == dependencies.size());
         }
     }
 }

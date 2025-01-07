@@ -2,7 +2,6 @@ package dev.couderc;
 
 
 import dev.couderc.exercise3.PackageDependencies;
-import dev.couderc.exercise3.PackageDependenciesMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -43,7 +42,7 @@ public class Exercise3Test {
                 - pkg2
                   - pkg3
                 - pkg3
-                """, deps.buildBasicTreeRepresentation());
+                """, deps.buildBasicTree());
     }
 
     @Test
@@ -56,6 +55,19 @@ public class Exercise3Test {
                 - pkg2
                   - pkg3
                 - pkg3
-                """, new PackageDependencies(Path.of("src/test/resources/pkg-dependencies.json")).buildBasicTreeRepresentation());
+                """, new PackageDependencies(Path.of("src/test/resources/pkg-dependencies.json")).buildBasicTree());
+    }
+
+    @Test
+    void getPrettyDependencyGraphRepresentationFromFile() {
+        Assertions.assertEquals("""
+                +--- pkg1
+                |    +--- pkg2
+                |    |    \\--- pkg3
+                |    \\--- pkg3
+                +--- pkg2
+                |    \\--- pkg3
+                \\--- pkg3
+                """, new PackageDependencies(Path.of("src/test/resources/pkg-dependencies.json")).buildPrettyTree());
     }
 }

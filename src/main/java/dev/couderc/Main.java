@@ -6,6 +6,7 @@ import dev.couderc.exercise2.exporter.DashSpreadsheetExporter;
 import dev.couderc.exercise2.exporter.StarSpreadsheetExporter;
 import dev.couderc.exercise2.spreadsheet.core.Spreadsheet;
 import dev.couderc.exercise2.spreadsheet.impl.SpreadsheetImpl;
+import dev.couderc.exercise3.PackageDependencies;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,5 +28,16 @@ public class Main {
         sheet.put(3, 4, "e");
         System.out.println(new DashSpreadsheetExporter(sheet).export());
         System.out.println(new StarSpreadsheetExporter(sheet).export());
+
+        System.out.println("\nExercise 3");
+        PackageDependencies dependencies = new PackageDependencies("""
+                {
+                  "pkg1": ["pkg2", "pkg3"],
+                  "pkg2": ["pkg3"],
+                  "pkg3": []
+                }
+                """);
+        System.out.println(dependencies.buildBasicTree());
+        System.out.println(dependencies.buildPrettyTree());
     }
 }
