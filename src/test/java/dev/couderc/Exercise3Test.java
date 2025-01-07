@@ -47,7 +47,7 @@ public class Exercise3Test {
 
     @Test
     void getBasicDependencyGraphRepresentationFromFile() {
-        Assertions.assertEquals("""
+        String expected = """
                 - pkg1
                   - pkg2
                     - pkg3
@@ -55,12 +55,14 @@ public class Exercise3Test {
                 - pkg2
                   - pkg3
                 - pkg3
-                """, new PackageDependencies(Path.of("src/test/resources/pkg-dependencies.json")).buildBasicTree());
+                """;
+        Assertions.assertEquals(expected, new PackageDependencies(Path.of("src/test/resources/pkg-dependencies.json")).buildBasicTree());
+        Assertions.assertEquals(expected, PackageDependencies.buildBasicTree("src/test/resources/pkg-dependencies.json"));
     }
 
     @Test
     void getPrettyDependencyGraphRepresentationFromFile() {
-        Assertions.assertEquals("""
+        String expected = """
                 +--- pkg1
                 |    +--- pkg2
                 |    |    \\--- pkg3
@@ -68,6 +70,8 @@ public class Exercise3Test {
                 +--- pkg2
                 |    \\--- pkg3
                 \\--- pkg3
-                """, new PackageDependencies(Path.of("src/test/resources/pkg-dependencies.json")).buildPrettyTree());
+                """;
+        Assertions.assertEquals(expected, new PackageDependencies(Path.of("src/test/resources/pkg-dependencies.json")).buildPrettyTree());
+        Assertions.assertEquals(expected, PackageDependencies.buildPrettyTree("src/test/resources/pkg-dependencies.json"));
     }
 }

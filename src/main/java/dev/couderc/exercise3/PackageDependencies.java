@@ -49,6 +49,10 @@ public class PackageDependencies {
         return sb.toString();
     }
 
+    public static String buildBasicTree(String filename) {
+        return new PackageDependencies(Path.of(filename)).buildBasicTree();
+    }
+
     private void appendWithLevel(StringBuilder sb, String key, int level) {
         sb.append(" ".repeat(level * SPACES_BY_LEVEL))
                 .append("- ")
@@ -85,5 +89,9 @@ public class PackageDependencies {
             count++;
             prettyAppendWithLevel(sb, prefix + "|" + " ".repeat(PRETTY_SPACES_BY_LEVEL), dependency, count == dependencies.size());
         }
+    }
+
+    public static String buildPrettyTree(String filename) {
+        return new PackageDependencies(Path.of(filename)).buildPrettyTree();
     }
 }
