@@ -1,5 +1,5 @@
 plugins {
-    id 'java'
+    id 'application'
 }
 
 group = 'dev.couderc'
@@ -20,6 +20,10 @@ dependencies {
     testImplementation 'org.junit.vintage:junit-vintage-engine'
 }
 
+application {
+    mainClass.set("dev.couderc.Main")
+}
+
 test {
     useJUnitPlatform()
     testLogging {
@@ -27,3 +31,4 @@ test {
         exceptionFormat = "full"
     }
 }
+
